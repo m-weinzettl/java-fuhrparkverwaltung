@@ -6,7 +6,7 @@ public class Lkw extends Vehicle {
     private double loadCapacity;
 
     public Lkw(String id, String vehicleSign, double vehicleMiles, double fuelAmount,
-               double tankSize, Employee actualDriver, int numberDoors, boolean vignette) {
+               double tankSize, Employee actualDriver, double maxWeightCapacity, double loadCapacity) {
 
         super(id, vehicleSign, vehicleMiles, fuelAmount, tankSize, actualDriver);
 

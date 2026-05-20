@@ -12,6 +12,21 @@ public class Pkw extends Vehicle {
         this.numberDoors = numberDoors;
         this.vignette = vignette;
     }
+    public boolean isVignette() {
+        return vignette;
+    }
+
+    public void setVignette(boolean vignette) {
+        this.vignette = vignette;
+    }
+
+    public int getNumberDoors() {
+        return numberDoors;
+    }
+
+    public void setNumberDoors(int numberDoors) {
+        this.numberDoors = numberDoors;
+    }
 }
 
 

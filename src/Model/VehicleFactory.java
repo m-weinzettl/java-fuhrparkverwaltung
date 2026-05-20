@@ -6,16 +6,18 @@ public abstract class VehicleFactory {
         if (type == null) {
             return null;
         }
-        switch (type.toUpperCase()){
+        switch (type.toUpperCase()) {
             case "PKW":
-                return new Pkw(id, vehicleSign, vehicleMiles, fuelAmount, tankSize, , true);
-                break;
+                return new Pkw(id, vehicleSign, vehicleMiles, fuelAmount,
+                        tankSize, null, 4, true);
             case "LKW":
-                return new Lkw(id, vehicleSign, vehicleMiles, fuelAmount, tankSize, , true);
-                break;
+                return new Lkw(id, vehicleSign, vehicleMiles, fuelAmount,
+                        tankSize, null, 12.0, 40.0);
             case "MOTORCYCLE":
-
-
+                return new Motorcycle(id, vehicleSign, vehicleMiles, fuelAmount,
+                        tankSize, null, true, "A");
+            default:
+                throw new IllegalArgumentException("Unbekannter Fahrzeugtyp: " + type);
         }
     }
 }
