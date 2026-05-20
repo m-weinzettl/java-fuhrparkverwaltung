@@ -1,6 +1,6 @@
 package Model;
 
-public abstract class VehicleFactory {
+public class VehicleFactory {
     public Vehicle createVehicle(String type, String id, String vehicleSign,
                                  double vehicleMiles, double fuelAmount, double tankSize) {
         if (type == null) {
