@@ -1,7 +1,17 @@
 package Model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "motorcycle")
+@PrimaryKeyJoinColumn(name = "id")
 public class Motorcycle extends Vehicle {
+    @Column(name = "helmet_case")
     private boolean helmetCase;
+    @Column(name = "license")
     private String license;
 
     public Motorcycle(String id, String vehicleSign, double vehicleMiles, double fuelAmount,
@@ -25,6 +35,9 @@ public class Motorcycle extends Vehicle {
 
     public void setHelmetCase(boolean helmetCase) {
         this.helmetCase = helmetCase;
+    }
+
+    public Motorcycle() {
     }
 }
 

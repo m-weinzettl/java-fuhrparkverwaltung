@@ -1,7 +1,14 @@
 package Model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "pkw")
+@PrimaryKeyJoinColumn(name = "id")
 public class Pkw extends Vehicle {
+    @Column(name = "number_of_doors")
     private int numberDoors;
+    @Column(name = "vignette")
     private boolean vignette;
 
     public Pkw(String id, String vehicleSign, double vehicleMiles, double fuelAmount,
@@ -26,6 +33,9 @@ public class Pkw extends Vehicle {
 
     public void setNumberDoors(int numberDoors) {
         this.numberDoors = numberDoors;
+    }
+
+    public Pkw() {
     }
 }
 

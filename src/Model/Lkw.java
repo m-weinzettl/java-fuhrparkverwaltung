@@ -1,8 +1,17 @@
 package Model;
 
-public class Lkw extends Vehicle {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "lkw")
+@PrimaryKeyJoinColumn(name = "id")
+public class Lkw extends Vehicle {
+    @Column(name = "max_weight_capacity")
     private double maxWeightCapacity;
+    @Column(name = "load_capacity")
     private double loadCapacity;
 
     public Lkw(String id, String vehicleSign, double vehicleMiles, double fuelAmount,
@@ -29,6 +38,9 @@ public class Lkw extends Vehicle {
 
     public void setLoadCapacity(double loadCapacity) {
         this.loadCapacity = loadCapacity;
+    }
+
+    public Lkw() {
     }
 }
 

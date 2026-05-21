@@ -1,12 +1,34 @@
 package Model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "vehicle")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Vehicle {
+
+    @Id
+    @Column(name = "id")
     private String id;
+
+    @Column(name = "vehicle_sign")
     private String vehicleSign;
+
+    @Column(name = "vehicle_miles")
     private double vehicleMiles;
+
+    @Column(name = "fuel_amount")
     private double fuelAmount;
+
+    @Column(name = "tank_size")
     private double tankSize;
+
+    @ManyToOne
+    @JoinColumn(name = "driver_id")
     private Employee actualDriver;
+
+    public Vehicle() {
+    }
 
     public Vehicle(String id, String vehicleSign, double vehicleMiles,
                    double fuelAmount, double tankSize, Employee actualDriver) {
@@ -16,7 +38,6 @@ public abstract class Vehicle {
         this.fuelAmount = fuelAmount;
         this.tankSize = tankSize;
         this.actualDriver = actualDriver;
-
     }
 
     public String getVehicleSign() {
@@ -66,18 +87,4 @@ public abstract class Vehicle {
     public void setTankSize(double tankSize) {
         this.tankSize = tankSize;
     }
-
 }
-
-
-//id : String (uuid)
-//
-//vehicleSign : String
-//
-//vehicleMiles : double
-//
-//fuelAmount : double
-//
-//tankSize : double
-//
-//actualDriver : employee (Verknüpfung zur Mitarbeiter-Klasse)
