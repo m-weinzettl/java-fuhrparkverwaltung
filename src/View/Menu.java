@@ -75,7 +75,8 @@ public class Menu {
                 input.nextLine();
                 boolean vignette = (vignetteChar == 'y' || vignetteChar == 'Y');
 
-                newVehicle = vehicleFactory.createPkw(id, vehicleSign, vehicleMiles, fuelAmount, tankSize, null, numberOfDoors, vignette);
+                newVehicle = vehicleFactory.createPkw(id, vehicleSign, vehicleMiles, fuelAmount, tankSize,
+                        null, numberOfDoors, vignette);
                 break;
 
             case "LKW":
@@ -85,7 +86,8 @@ public class Menu {
                 double loadCapacity = input.nextDouble();
                 input.nextLine();
 
-                newVehicle = vehicleFactory.createLkw(id, vehicleSign, vehicleMiles, fuelAmount, tankSize, null, maxWeightCapacity, loadCapacity);
+                newVehicle = vehicleFactory.createLkw(id, vehicleSign, vehicleMiles, fuelAmount,
+                        tankSize, null, maxWeightCapacity, loadCapacity);
                 break;
 
             case "MOTORCYCLE":
@@ -96,7 +98,8 @@ public class Menu {
                 System.out.print("Benötigte Führerscheinklasse: ");
                 String license = input.nextLine();
 
-                newVehicle = vehicleFactory.createMotorcycle(id, vehicleSign, vehicleMiles, fuelAmount, tankSize, null, helmetCase, license);
+                newVehicle = vehicleFactory.createMotorcycle(id, vehicleSign, vehicleMiles, fuelAmount,
+                        tankSize, null, helmetCase, license);
                 break;
 
             default:
@@ -138,14 +141,16 @@ public class Menu {
     private void handleAssignEmployeeToVehicle(EntityManager entityManager) {
         System.out.println("--- Liste aller Fahrzeuge ---");
 
-        java.util.List<Vehicle> vehicles = entityManager.createQuery("SELECT v FROM Vehicle v", Vehicle.class).getResultList();
+        java.util.List<Vehicle> vehicles = entityManager.createQuery(
+                "SELECT v FROM Vehicle v", Vehicle.class).getResultList();
 
         if (vehicles.isEmpty()) {
             System.out.println("Keine Fahrzeuge in der Datenbank vorhanden.");
             return;
         }
         for(Vehicle v : vehicles) {
-            System.out.println("ID: " + v.getId() + " | Kennzeichen: " + v.getVehicleSign() + " | Typ: " + v.getClass().getSimpleName());
+            System.out.println("ID: " + v.getId() + " | Kennzeichen: "
+                    + v.getVehicleSign() + " | Typ: " + v.getClass().getSimpleName());
         }
 
         System.out.println("-----------------------------");
@@ -162,9 +167,31 @@ public class Menu {
         }
         for(Employee employee: employees) {
             System.out.println("ID: " + employee.getEmployeeId() +
-                    " | Name: " + employee.getLastName() + " | Typ: " + employee.getClass().getSimpleName());
+                    " | Name: " + employee.getLastName() + " | Typ: " +
+                    employee.getClass().getSimpleName());
         }
         System.out.print("Gib die Mitarbeiter-ID ein: ");
         String employeeId = input.nextLine();
+
+        Vehicle vehicle = entityManager.find(Vehicle.class, vehicleId);
+        Employee employee = entityManager.find(Employee.class, employeeId);
+
+        if (vehicle == null) {
+            System.out.println("Fehler: Fahrzeug mit ID '" + vehicleId + "' nicht gefunden.");
+            return;
+        }
+
+        if (employee == null) {
+            System.out.println("Fehler: Mitarbeiter mit ID '" + employeeId + "' nicht gefunden.");
+            return;
+        }
+
+        entityManager.getTransaction().begin();
+        vehicle.setActualDriver(employee);
+        entityManager.getTransaction().commit();
+
+        System.out.println("Erfolg: Fahrzeug " + vehicle.getVehicleSign() +
+                " wurde " + employee.getFirstName() + " " + employee.getLastName() + " zugewiesen!");
     }
+
 }
