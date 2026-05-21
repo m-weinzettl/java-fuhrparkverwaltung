@@ -2,8 +2,15 @@ package Model;
 
 import jakarta.persistence.*;
 
+/**
+ * Die abstrakte Basisklasse Vehicle repräsentiert ein Fahrzeug im System.
+ * Sie dient als übergeordnetes Datenmodell (Entität) für konkrete Fahrzeugtypen
+ * und definiert die gemeinsamen Attribute sowie die JPA-Vererbungsstrategie.
+ */
 @Entity
 @Table(name = "vehicle")
+// JOINED bedeutet: Für die Basisklasse und jede Unterklasse wird eine eigene Tabelle in der DB angelegt.
+// Die Tabellen werden über den Primärschlüssel (id) miteinander verknüpft.
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Vehicle {
 
@@ -23,13 +30,30 @@ public abstract class Vehicle {
     @Column(name = "tank_size")
     private double tankSize;
 
+    // Definiert eine n:1-Beziehung (Viele Fahrzeuge können demselben Fahrer zugewiesen sein).
+    // In der Datenbank wird eine Fremdschlüsselspalte 'driver_id' in der Vehicle-Tabelle erzeugt.
     @ManyToOne
     @JoinColumn(name = "driver_id")
     private Employee actualDriver;
 
+    /**
+     * Der Standardkonstruktor (No-Arg-Constructor).
+     * Dieser ist zwingend erforderlich, da JPA/Hibernate ihn für die
+     * Instanziierung der Objekte beim Laden aus der Datenbank benötigt.
+     */
     public Vehicle() {
     }
 
+    /**
+     * Konstruktor zur Erstellung eines Fahrzeugs mit allen gemeinsamen Attributen.
+     *
+     * @param id           Eindeutige ID des Fahrzeugs (Primärschlüssel)
+     * @param vehicleSign  Das Kennzeichen des Fahrzeugs
+     * @param vehicleMiles Der aktuelle Kilometerstand
+     * @param fuelAmount   Der aktuelle Tankfüllstand
+     * @param tankSize     Das maximale Tankvolumen
+     * @param actualDriver Der dem Fahrzeug aktuell zugewiesene Fahrer
+     */
     public Vehicle(String id, String vehicleSign, double vehicleMiles,
                    double fuelAmount, double tankSize, Employee actualDriver) {
         this.id = id;
@@ -39,6 +63,10 @@ public abstract class Vehicle {
         this.tankSize = tankSize;
         this.actualDriver = actualDriver;
     }
+
+    // ==========================================
+    // Getter und Setter (Zugriffsmethoden)
+    // ==========================================
 
     public String getVehicleSign() {
         return vehicleSign;
@@ -88,4 +116,3 @@ public abstract class Vehicle {
         this.tankSize = tankSize;
     }
 }
-
