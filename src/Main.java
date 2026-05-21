@@ -1,4 +1,5 @@
 
+import Controller.ParkManager;
 import Model.VehicleFactory;
 import View.Menu;
 import jakarta.persistence.EntityManager;
@@ -11,7 +12,8 @@ class Main{
                 Persistence.createEntityManagerFactory("FuhrparkverwaltungDB");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        Menu menu = new Menu();
+
+        Menu menu = new Menu(new ParkManager(entityManager, new VehicleFactory()));
         menu.showMenu(new VehicleFactory(), entityManager);
 
         entityManager.close();
