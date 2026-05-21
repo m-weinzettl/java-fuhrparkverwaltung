@@ -3,6 +3,7 @@ package View;
 import Controller.ParkManager;
 import jakarta.persistence.EntityManager;
 import Model.VehicleFactory;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -12,6 +13,7 @@ public class Menu {
     public Menu(ParkManager parkManager) {
         this.parkManager = parkManager;
     }
+
     public void showMenu(VehicleFactory vehicleFactory, EntityManager entityManager) {
         int option;
 

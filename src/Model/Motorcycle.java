@@ -15,12 +15,13 @@ public class Motorcycle extends Vehicle {
     private String license;
 
     public Motorcycle(String id, String vehicleSign, double vehicleMiles, double fuelAmount,
-                      double tankSize, Employee actualDriver, boolean helmetCase, String license){
+                      double tankSize, Employee actualDriver, boolean helmetCase, String license) {
         super(id, vehicleSign, vehicleMiles, fuelAmount, tankSize, actualDriver);
 
         this.helmetCase = helmetCase;
         this.license = license;
     }
+
     public String getLicense() {
         return license;
     }
@@ -40,7 +41,3 @@ public class Motorcycle extends Vehicle {
     public Motorcycle() {
     }
 }
-
-//elmetCase : boolean
-//
-// license : String (z.B. A1, A2, A)

@@ -43,7 +43,3 @@ public class Lkw extends Vehicle {
     public Lkw() {
     }
 }
-
-/// /maxWeightCapacity : double (in Tonns)
-/// /
-/// / loadCapacity : double (in m^3)

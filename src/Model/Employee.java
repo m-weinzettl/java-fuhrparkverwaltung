@@ -1,6 +1,7 @@
 package Model;
 
 import jakarta.persistence.*;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -70,3 +71,4 @@ public class Employee {
         this.licenseList = licenseList;
     }
 }
+

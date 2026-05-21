@@ -118,7 +118,7 @@ public class ParkManager {
             System.out.println("Keine Fahrzeuge in der Datenbank vorhanden.");
             return;
         }
-        for(Vehicle v : vehicles) {
+        for (Vehicle v : vehicles) {
             System.out.println("ID: " + v.getId() + " | Kennzeichen: "
                     + v.getVehicleSign() + " | Typ: " + v.getClass().getSimpleName());
         }
@@ -135,7 +135,7 @@ public class ParkManager {
             System.out.println("Keine Mitarbeiter in der Datenbank vorhanden.");
             return;
         }
-        for(Employee employee: employees) {
+        for (Employee employee : employees) {
             System.out.println("ID: " + employee.getEmployeeId() +
                     " | Name: " + employee.getLastName() + " | Typ: " +
                     employee.getClass().getSimpleName());
